@@ -137,12 +137,34 @@ public class JUnitTestStringTemplateParser {
 		String result = stp.parse("Hello $foo", mr);
 		assertEquals(result,"Hello Jodd");
 	}
+		
+	@Test(expected = IllegalArgumentException.class)
+	public void testInvalidMacroEnd(){
+		String result = stp.parse("Hello ${foo)", mr);
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void testNoMacroEnd(){
+		String result = stp.parse("Hello ${foo", mr);
+	}
 	
 	@Test
-	public void testNotStrictFormatAndDifferentMacroPrefix(){
-		stp.setMacroPrefix("%");
-		String result = stp.parse("Hello %foo", mr);
+	public void testInvalidMacroStart(){
+		String result = stp.parse("Hello $(foo}", mr);
+		assertEquals(result,"Hello $(foo}");
+	}
+	
+	@Test
+	public void testMacroIncludedInMacro(){
+		String result = stp.parse("Hello ${foo${${foo}}}", mr);
 		assertEquals(result,"Hello Jodd");
 	}
+	
+	@Test
+	public void testMacroIncludedInMacroWithSpace(){
+		String result = stp.parse("Hello ${foo ${${foo}}}", mr);
+		assertEquals(result,"Hello ");
+	}
+	
 
 }
