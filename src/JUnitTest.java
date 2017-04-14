@@ -51,5 +51,16 @@ public class JUnitTest {
 		String result = stp.parse("Hello ${foo}, %{foo}", mr);
 		assertEquals(result, "Hello Jodd, %{foo}");
 	}
+	
+	/*
+	@Test
+	public void testMapOfObject(){
+		Map<Object,Object> mapObject = new HashMap<Object,Object>();
+		mapObject.put("foo", "Jodd");
+		mr = StringTemplateParser.createMapMacroResolver(mapObject);
+		String result = stp.parse("Hello ${foo}", mr);
+		assertEquals(result, "Hello Jodd");
+	}*/
+	
 
 }
