@@ -189,7 +189,8 @@ public class JUnitTestStringTemplateParser {
 	@Test
 	public void testParseValue(){
 		stp.setParseValues(true);
-		String result = stp.parse("Hello ${notKeyInMap}", mr);
+		map.put("maStringValue", "${mapBug}");
+		String result = stp.parse("Hello ${maStringValue}", mr);
 		assertEquals(result,"Hello ");
 	}
 }
