@@ -61,6 +61,50 @@ public class JUnitTest {
 		String result = stp.parse("Hello ${foo}", mr);
 		assertEquals(result, "Hello Jodd");
 	}*/
+
+	@Test
+	public void testTemplateKeyNotInMap(){
+	    template = "Hello ${4}";
+	    
+	    StringTemplateParser stp = new StringTemplateParser();
+	    MacroResolver mr = stp.createMapMacroResolver(map);
+	    String result = stp.parse(template, mr);
+	    assertEquals(result, "Hello ");
+	}
+	
+	
+	
+	@Test
+	public void testTemplateCorrect(){
+		template = "Hello ${foo} ${test}, it's always sunny on ${dayName}";
+	    map.put("test", "James");
+	    map.put("dayName", "Monday");
+	    
+	    StringTemplateParser stp = new StringTemplateParser();
+	    MacroResolver mr = stp.createMapMacroResolver(map);
+	    String result = stp.parse(template, mr);
+	    assertEquals(result, "Hello Jodd James, it's always sunny on Monday");
+	}
+	
+	
+	@Test(expected=NullPointerException.class)
+	public void testNullObject(){
+	    template = "Hello ${foo}";
+	    StringTemplateParser stp = new StringTemplateParser();
+	    MacroResolver mr = stp.createMapMacroResolver(null);
+	    String result = stp.parse(template, mr);
+	    System.out.println(result);
+	}
+	
+	@Test
+	public void testWithEmptyMap(){
+	    template = "Hello ${foo}";
+	    Map<String, String> map = new HashMap<String, String>();
+	    StringTemplateParser stp = new StringTemplateParser();
+	    MacroResolver mr = stp.createMapMacroResolver(map);
+	    String result = stp.parse(template, mr);
+	    assertEquals(result, "Hello ");
+	}
 	
 
 }
