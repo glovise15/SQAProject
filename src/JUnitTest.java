@@ -72,8 +72,6 @@ public class JUnitTest {
 	    assertEquals(result, "Hello ");
 	}
 	
-	
-	
 	@Test
 	public void testTemplateCorrect(){
 		template = "Hello ${foo} ${test}, it's always sunny on ${dayName}";
