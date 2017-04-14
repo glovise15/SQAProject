@@ -122,7 +122,7 @@ public class JUnitTestStringTemplateParser {
 	@Test
 	public void testResolvesEscapeFalse(){
 		stp.setResolveEscapes(false);
-		String result = stp.parse("Hello \\${foo} ", mr);
+		String result = stp.parse("Hello \\${foo}", mr);
 		System.out.println(result);
 		assertEquals(result, "Hello \\${foo}");
 	}
@@ -132,6 +132,11 @@ public class JUnitTestStringTemplateParser {
 		String result = stp.parse("Hello \\${foo}", mr);
 		System.out.println(result);
 		assertEquals(result,"Hello ${foo}");
+	}
+	
+	@Test
+	public void testStrictNull(){
+		
 	}
 
 }
