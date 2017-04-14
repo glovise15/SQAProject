@@ -11,7 +11,7 @@ public class Test {
 	    Map<String, String> map = new HashMap<String, String>();
 	    map.put("foo", "Jodd");
 	    map.put("dayName", "Sunday");
-	    
+	    //test
 	    // parse
 	    StringTemplateParser stp = new StringTemplateParser();
 	    MacroResolver mr = stp.createMapMacroResolver(map);
