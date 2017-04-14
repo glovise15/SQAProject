@@ -148,6 +148,12 @@ public class JUnitTestStringTemplateParser {
 		String result = stp.parse("Hello ${foo", mr);
 	}
 	
+	@Test(expected=IllegalArgumentException.class)
+	public void testIllegalKey(){
+		String result = stp.parse("Hello ${${foo}", mr);
+		assertEquals(result,"Hello Jodd");
+	}
+	
 	@Test
 	public void testInvalidMacroStart(){
 		String result = stp.parse("Hello $(foo}", mr);
@@ -171,6 +177,20 @@ public class JUnitTestStringTemplateParser {
 		stp.setMissingKeyReplacement("test");
 		String result = stp.parse("Hello ${notKeyInMap}", mr);
 		assertEquals(result,"Hello test");
+	}
+	
+	@Test
+	public void testReplaceMissingKeyFalse(){
+		stp.setReplaceMissingKey(false);
+		String result = stp.parse("Hello ${notKeyInMap}", mr);
+		assertEquals(result,"Hello ${notKeyInMap}");
+	}
+	
+	@Test
+	public void testParseValue(){
+		stp.setParseValues(true);
+		String result = stp.parse("Hello ${notKeyInMap}", mr);
+		assertEquals(result,"Hello ${notKeyInMap}");
 	}
 	
 
