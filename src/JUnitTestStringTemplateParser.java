@@ -166,5 +166,12 @@ public class JUnitTestStringTemplateParser {
 		assertEquals(result,"Hello ");
 	}
 	
+	@Test
+	public void testMissingKey(){
+		stp.setMissingKeyReplacement("test");
+		String result = stp.parse("Hello ${notKeyInMap}", mr);
+		assertEquals(result,"Hello test");
+	}
+	
 
 }
