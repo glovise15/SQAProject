@@ -56,7 +56,6 @@ public class JUnitTest {
 	@Test
 	public void testTemplateKeyNotInMap(){
 	    template = "Hello ${4}";
-	    map.put("foo", "Jodd");
 	    
 	    StringTemplateParser stp = new StringTemplateParser();
 	    MacroResolver mr = stp.createMapMacroResolver(map);
@@ -69,7 +68,6 @@ public class JUnitTest {
 	@Test
 	public void testTemplateCorrect(){
 		template = "Hello ${foo} ${test}, it's always sunny on ${dayName}";
-	    map.put("foo", "Jodd");
 	    map.put("test", "James");
 	    map.put("dayName", "Monday");
 	    
