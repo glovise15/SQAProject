@@ -123,20 +123,26 @@ public class JUnitTestStringTemplateParser {
 	public void testResolvesEscapeFalse(){
 		stp.setResolveEscapes(false);
 		String result = stp.parse("Hello \\${foo}", mr);
-		System.out.println(result);
 		assertEquals(result, "Hello \\${foo}");
 	}
 	
 	@Test
 	public void testEscape(){
 		String result = stp.parse("Hello \\${foo}", mr);
-		System.out.println(result);
 		assertEquals(result,"Hello ${foo}");
 	}
 	
 	@Test
-	public void testStrictNull(){
-		
+	public void testNotStrictFormat(){
+		String result = stp.parse("Hello $foo", mr);
+		assertEquals(result,"Hello Jodd");
+	}
+	
+	@Test
+	public void testNotStrictFormatAndDifferentMacroPrefix(){
+		stp.setMacroPrefix("%");
+		String result = stp.parse("Hello %foo", mr);
+		assertEquals(result,"Hello Jodd");
 	}
 
 }
