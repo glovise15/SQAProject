@@ -99,5 +99,39 @@ public class JUnitTestStringTemplateParser {
 		String result = stp.parse(template, mr);
 		assertEquals(result, "Hello ");
 	}
+	
+	
+	//Additionnal tests coverage
+	@Test
+	public void testMacroPrefixNull(){
+		stp.setMacroPrefix(null);
+		String result = stp.parse("Hello ${foo}", mr);
+		assertEquals(result, "Hello Jodd");
+	}
+	
+	@Test
+	public void testNewMacro(){
+		//System.out.println(stp.getMacroStart() + " " + stp.getMacroPrefix() + " " + stp.getMacroEnd());
+		stp.setMacroStart("%[");
+		stp.setMacroPrefix("%");
+		stp.setMacroEnd("]");
+		String result = stp.parse("Hello %[foo]", mr);
+		assertEquals(result, "Hello Jodd");
+	}
+	
+	@Test
+	public void testResolvesEscapeFalse(){
+		stp.setResolveEscapes(false);
+		String result = stp.parse("Hello \\${foo} ", mr);
+		System.out.println(result);
+		assertEquals(result, "Hello \\${foo}");
+	}
+	
+	@Test
+	public void testEscape(){
+		String result = stp.parse("Hello \\${foo}", mr);
+		System.out.println(result);
+		assertEquals(result,"Hello ${foo}");
+	}
 
 }
