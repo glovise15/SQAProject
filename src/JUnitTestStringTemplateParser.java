@@ -172,6 +172,4 @@ public class JUnitTestStringTemplateParser {
 		String result = stp.parse("Hello ${notKeyInMap}", mr);
 		assertEquals(result,"Hello test");
 	}
-	
-
 }
